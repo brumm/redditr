@@ -57,7 +57,7 @@ var AppView = Backbone.View.extend({
       this.render();
    },
    render: function() {
-      $(this.el).append("<ul id='posts'></ul>");
+      $(this.el).find("#posts .post").remove();
       return this;
    },
    addPost: function(post) {
@@ -86,6 +86,8 @@ var AppController = Backbone.Controller.extend({
    }
 });
 
+///////////////////////////////////////////////////////////////////////
+
 $(document).ready(function() {
    new AppController();
    Backbone.history.start();
@@ -94,6 +96,10 @@ $(document).ready(function() {
       var target = $(this).attr("class").split("_")[0];
       var post = $(this).closest(".post");
       var wanted = post.find("span." + target);
+      this.old_height = this.height;
+      this.height = post.height();
+      post.css('height', this.height);
+      console.log(this.height);
       event.preventDefault();
       
       
@@ -101,6 +107,7 @@ $(document).ready(function() {
       
       if (target == "comments") {
          if (post.hasClass("open")) {
+            post.animate({ "height": this.old_height });
             post.removeClass("open");
             $(this).removeClass('clicked');
             post.find(".comment").remove();
@@ -113,8 +120,11 @@ $(document).ready(function() {
                   post.find("#" + comment.id).append($("<div></div>").html(comment.body_html).text());
                   //.append(response[1].data.children[i].data.body_html).text());
                };
+               post.addClass("open");
+               post.animate({
+                  height: post.find(".content").height()
+               });
             });
-            post.addClass("open");
             return;
          };
       };

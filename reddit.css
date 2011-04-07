@@ -3,6 +3,10 @@ body, ul {
   padding: 0;
 }
 
+body {
+   background: url(noise.png), #E9E8E5;
+}
+
 a {
    color: inherit;
    text-decoration: none;
@@ -13,10 +17,13 @@ a {
    position: fixed;
    background: url(noise.png), -moz-linear-gradient( top, #D8D4CD, #BCB9B3);
    border-bottom: 1px solid #ADA89E;
-   -moz-box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.4) inset;
+   -moz-box-shadow:  0px -1px 0px rgba(255, 255, 255, 0.4) inset,
+                     0px 0px 2px rgba(0, 0, 0, 0.4);
 }
 
-#header #navigation {
+#header #search {
+   -moz-appearance: none;
+   border: none;
    color: #534D3F;
    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.4);
    display: inline-block;
@@ -28,11 +35,6 @@ a {
    top: 10px;
    -moz-box-shadow:  0px 1px 0px rgba(255, 255, 255, 0.3),
                      0px 1px 0px rgba(0, 0, 0, 0.1) inset;
-}
-
-#header #navigation li {
-   display: inline-block;
-   padding: 5px 10px;
 }
 
 #header .logo {
@@ -56,7 +58,17 @@ a {
    background: url(noise.png) #E8E7E2;
   background: url(noise.png), -moz-linear-gradient( top, #E8E7E2 60%, #DBDAD4);
   -moz-box-shadow:  0px -1px 0px rgba(0, 0, 0, 0.1) inset,
-                    0px 1px 0px rgba(255, 255, 255, 0.4) inset;
+                    0px 1px 0px rgba(255, 255, 255, 0.6) inset;
+}
+
+.post.open + .post {
+   -moz-box-shadow:  0px 1px 0px rgba(255, 255, 255, 1) inset;
+}
+
+.open {
+   border-top: 1px solid #35312A;
+   -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5) inset;
+   background: url(noise.png), #7E7565;
 }
 
 .thumbnail img {
@@ -80,6 +92,19 @@ a {
   text-shadow: 0px 1px 0px rgba(255, 255, 255, 1);
 }
 
+.open .text .md,
+.open .comment .md,
+.open .title {
+   color: #E9E8E5;
+   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.open .text .md,
+.open .comment .md {
+   border: 1px solid #565045;
+   -moz-box-shadow:  0px 1px 0px rgba(255, 255, 255, 0.3),
+                     0px 1px 0px rgba(255, 255, 255, 0.3) inset;
+}
 .image {
   padding-top: 20px;
 /*  margin-left: 100px;*/
@@ -90,7 +115,7 @@ a {
   -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
   padding: 3px;
   background-color: #fff;
-  max-width: 70%;
+  max-width: 90%;
 }
 
 .comment .md,
@@ -109,19 +134,28 @@ a {
    border: 1px solid #B7B4AE;
 }
 
-.text .md p,
-.comment .md p {
-/*   margin: 0;*/
+.md p {
+   margin: 0;
 }
 
-.text .md p a,
-.comment .md p a {
-   color: #4B8CBA;
+.md p:not(:first-child) {
+   margin-top: 15px;
 }
 
-.text .md p a:hover,
-.comment .md p a:hover {
+.md p a {
+   color: #75B5F9;
+}
+
+.md p a:hover {
    text-decoration: underline;
+}
+
+.md ul {
+   margin-left: 20px;
+}
+
+.post_actions {
+   margin-top: 2px;
 }
 
 .post_actions li {
@@ -133,10 +167,20 @@ a {
   padding: 3px 5px 2px 5px;
 }
 
+.post_actions li:first-child {
+   margin-left: -5px;
+}
+
+.open .post_actions li {
+   color: #433E35;
+   text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2);
+   
+}
+
 .post_actions li.clicked {
-   background-color: rgba(0, 0, 0, 0.05);
+   background-color: rgba(0, 0, 0, 0.1);
    -moz-border-radius: 5px;
-   -moz-box-shadow:  0px 1px 0px rgba(255, 255, 255, 0.7),
+   -moz-box-shadow:  0px 1px 0px rgba(255, 255, 255, 0.3),
                      0px 1px 0px rgba(0, 0, 0, 0.1) inset;
 }
 
@@ -151,9 +195,4 @@ a {
 
 .hidden {
   display: none;
-}
-
-.open {
-   -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5) inset;
-/*   background: url(noise.png), -moz-linear-gradient( top, #E0DFDA, #D1D0CB);*/
 }

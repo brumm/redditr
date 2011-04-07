@@ -12,14 +12,9 @@
 <body>
 	<div id="header">
 		<span class="logo">redditr</span>
-		<ul id="navigation">
-			<li>hot</li>
-			<li>new</li>
-			<li>controversial</li>
-			<li>top</li>
-		</ul>
+		<input type="text" id="search">
 	</div>
-	
+	<ul id='posts'></ul>
 	<script type="text/template" id="postTemplate">
 		<li class="post" id="<%= id %>">
 			<span class="thumbnail"><a href="<%= url %>"><img src="<%= thumbnail %>" alt="" /></a></span>
