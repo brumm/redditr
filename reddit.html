@@ -26,15 +26,13 @@
 			<span class="content">
 				<span class="title"><a href="<%= url %>"><%= title %></a></span>
 				<ul class="post_actions">
-					<li class="text_button">Text</li>
-					<li class="image_button">Image</li>
+					<% if (selftext) { print('<li class="text_button">Text</li>'); }; %>
+					<% if (image_url) { print('<li class="image_button">Image</li>'); }; %>
 					<li class="comments_button"><a href="<%= permalink %>">Comments</a></li>
 				</ul>
-			<% if (selftext) %>
-				<span class="text hidden"><%= selftext %></span>
+				<% if (selftext) { print('<span class="text hidden"><%= selftext %></span>'); }; %>
+				<% if (image_url) { print('<span class="image hidden"><img src="<%= image_url %>" alt="" /></span>'); }; %>				
 			</span>
-			<% if (image_url) %>
-				<span class="image hidden"><img src="<%= image_url %>" alt="" /></span>
 		</li>
 	</script>
 </body>

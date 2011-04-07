@@ -29,7 +29,7 @@ var PostView = Backbone.View.extend({
          title : this.model.get("title"),
          thumbnail : this.model.get("thumbnail"),
          image_url : this.model.get("image_url"),
-         selftext : this.model.get("selftext"),
+         selftext : $("<div></div>").html(this.model.get("selftext_html")).text(),
          url : this.model.get("url"),
          permalink : this.model.get("permalink")
       });
@@ -125,7 +125,7 @@ $(document).ready(function() {
       else {
          wanted.addClass('hidden');
          post.removeClass("open");
-         $(this).remove('clicked');
+         $(this).removeClass('clicked');
       };
    });
 });
