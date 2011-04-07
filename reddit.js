@@ -1,11 +1,10 @@
-// var postTemplate = "<li><%= title %></li>";
 
 var Post = Backbone.Model.extend({
 });
 
 var Posts = Backbone.Collection.extend({
    model: Post, 
-   url: "http://www.reddit.com/hot/.json?jsonp=?", 
+   url: "http://www.reddit.com/hot/.json?limit=100&jsonp=?", 
    initialize: function() {
    },
    parse: function(response) {
@@ -13,6 +12,7 @@ var Posts = Backbone.Collection.extend({
          child.data.image_url = (child.data.url.match(/\.png|jpg|gif$/) ? child.data.url : (child.data.url.match(/imgur.com\/([a-zA-Z]{5})$/) ? "http://i.imgur.com/" + child.data.url.match(/imgur.com\/([a-zA-Z]{5})$/)[1] + ".png" : ""));
          child.data.thumbnail = _.isEmpty(child.data.thumbnail) || child.data.thumbnail.match(/^\/static/) ? "noimage.png" : child.data.thumbnail;
          child.data.thumbnail = child.data.image_url ? child.data.image_url : child.data.thumbnail;
+         child.data.permalink = "http://www.reddit.com" + child.data.permalink;
          return child.data;
       });
       return parsed;
@@ -30,7 +30,8 @@ var PostView = Backbone.View.extend({
          thumbnail : this.model.get("thumbnail"),
          image_url : this.model.get("image_url"),
          selftext : this.model.get("selftext"),
-         url : this.model.get("url")
+         url : this.model.get("url"),
+         permalink : this.model.get("permalink")
       });
       return this;
    }
@@ -89,10 +90,13 @@ $(document).ready(function() {
    new AppController();
    Backbone.history.start();
    
-   $(".post_actions li").live("click", function() {
+   $(".post_actions li").live("click", function(event) {
       var target = $(this).attr("class").split("_")[0];
       var post = $(this).closest(".post");
       var wanted = post.find("span." + target);
+      event.preventDefault();
+      
+      
       $(this).addClass('clicked');
       
       if (target == "comments") {
@@ -104,7 +108,10 @@ $(document).ready(function() {
          else {
             $.getJSON("http://www.reddit.com/comments/" + post.attr("id") + ".json?limit=4&jsonp=?", function(response) {
                for (var i=0; i < response[1].data.children.length-1; i++) {
-                  post.find(".content").append($("<span class='comment'>" + response[1].data.children[i].data.body + "</span>"));
+                  var comment = response[1].data.children[i].data;
+                  post.find(".content").append($("<span id='" + comment.id + "' class='comment'></span>")); 
+                  post.find("#" + comment.id).append($("<div></div>").html(comment.body_html).text());
+                  //.append(response[1].data.children[i].data.body_html).text());
                };
             });
             post.addClass("open");
