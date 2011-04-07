@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>redditr</title>
+	<link rel="stylesheet" href="reddit.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="underscore-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="backbone-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="reddit.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="header">
+		<span class="logo">redditr</span>
+		<ul id="navigation">
+			<li>hot</li>
+			<li>new</li>
+			<li>controversial</li>
+			<li>top</li>
+		</ul>
+	</div>
+	
+	<script type="text/template" id="postTemplate">
+		<li class="post" id="<%= id %>">
+			<span class="thumbnail"><a href="<%= url %>"><img src="<%= thumbnail %>" alt="" /></a></span>
+			<span class="content">
+				<span class="title"><a href="<%= url %>"><%= title %></a></span>
+				<ul class="post_actions">
+					<li class="text_button">Text</li>
+					<li class="image_button">Image</li>
+					<li class="comments_button">Comments</li>
+				</ul>
+			<% if (selftext) %>
+				<span class="text hidden"><%= selftext %></span>
+			</span>
+			<% if (image_url) %>
+				<span class="image hidden"><img src="<%= image_url %>" alt="" /></span>
+		</li>
+	</script>
+</body>
+</html>
