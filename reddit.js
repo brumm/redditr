@@ -126,7 +126,7 @@ $(document).ready(function() {
       
       if (targetType == "comments") {
          if (post.hasClass("open")) {
-            post.animate({"background-color": "#E8E7E2", "height": this.old_height }, "", "easeOutQuart", function() {
+            post.animate({"background-color": "#E8E7E2", "height": this.old_height }, "", "easeOutExpo", function() {
                post.removeClass("open");
                target.removeClass('clicked');
                post.find(".comment").remove();
@@ -140,7 +140,7 @@ $(document).ready(function() {
                   post.find("#" + comment.id).append($("<div></div>").html(comment.body_html).text());
                };
                post.addClass("open");
-               post.animate({"background-color": "#7E7565", "height" : post.find(".content").height() }, "", "easeOutQuart");
+               post.animate({"background-color": "#7E7565", "height" : post.find(".content").height() }, "", "easeOutExpo");
             });
             return;
          };
@@ -149,10 +149,10 @@ $(document).ready(function() {
          wanted.removeClass('hidden');
          post.addClass("open");
          // post.animate({"background-color": "#7E7565", "height" : post.find(".content").height() > 400 ? "400px" : post.find(".content").height() });
-         post.animate({"background-color": "#7E7565", "height" : post.find(".content").height() }, "", "easeOutQuart");
+         post.animate({"background-color": "#7E7565", "height" : post.find(".content").height() }, "", "easeOutExpo");
       } 
       else {
-         post.animate({"background-color": "#E8E7E2", "height": this.old_height }, "", "easeOutQuart", function() {
+         post.animate({"background-color": "#E8E7E2", "height": this.old_height }, "", "easeOutExpo", function() {
             wanted.addClass('hidden');
             post.removeClass("open");
             target.removeClass('clicked');
